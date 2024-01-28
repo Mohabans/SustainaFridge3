@@ -9,10 +9,10 @@ class Fridge (invList: MutableList<Item>){
     }
 
     fun nameList(): MutableList<String>{
-
+        val sortedItemsList : List<Item> = this.inventoryList.sortedBy{it.daysRemaining}
         var namesList : MutableList<String> = mutableListOf()
 
-        for( element in this.inventoryList){
+        for( element in sortedItemsList){
 
             namesList.add(element.name + "  -  " + element.daysRemaining.toString() + " days until expired")
 
