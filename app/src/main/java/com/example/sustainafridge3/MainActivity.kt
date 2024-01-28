@@ -2,12 +2,14 @@ package com.example.sustainafridge3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ListView
 import android.widget.TextView
-import java.text.SimpleDateFormat
+import java.util.Arrays
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +34,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun showList(itemNameList : MutableList<String>): View {
+        val dataArrayList = ArrayList(itemNameList)
+        val dataAdapter = ArrayAdapter(this, R.layout.list_item, dataArrayList)
+        val dataView = findViewById<ListView>(R.id.listView)
+        dataView.adapter = dataAdapter
+        return dataView
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         val items = mutableListOf(Item("Apple"), Item("Milk"), Item("Eggs"))
         var testFridge = Fridge(items)
 
+        showList(testFridge.nameList())
+
         val fridgeMap = Expire()
         val calander = Calendar.getInstance()
 
@@ -49,6 +61,9 @@ class MainActivity : AppCompatActivity() {
         val mButton: Button = findViewById(R.id.button)
         val mEditText: EditText = findViewById(R.id.editText1)
         val mTextView: TextView = findViewById(R.id.textView)
+
+
+        val mListView: ListView = findViewById(R.id.listView)
 
         mButton.setOnClickListener {
 
@@ -69,6 +84,7 @@ class MainActivity : AppCompatActivity() {
                     newItem.expireDate = futureDate
 
                     testFridge.addItem(newItem)
+                    showList(testFridge.nameList())
 
                 } else {
                    //Possible Error/Timeout
@@ -79,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            mTextView.setText(userInput)
+            //mTextView.setText(userInput)
 
 
         }
