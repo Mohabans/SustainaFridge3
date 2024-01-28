@@ -1,5 +1,8 @@
 package com.example.sustainafridge3
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -26,6 +32,23 @@ class camera_fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+
+
+    private fun Image.toBitmap(): Bitmap? {
+        val planes = this.planes
+        val buffer = planes[0].buffer
+        val bytes = ByteArray(buffer.remaining())
+        buffer.get(bytes)
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    }
+
+    private fun processImage(bitmap: Bitmap) {
+        // Use ML Kit's text recognition API on the bitmap
+        // Example: TextRecognition.processImage(bitmap)
+        // Handle the recognized text as needed
+        // ...
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +93,8 @@ class camera_fragment : Fragment() {
                 //Log.e(TAG, "Use case binding failed", exception)
             }
         }, ContextCompat.getMainExecutor(requireContext()))
+
+
 
     }
 
