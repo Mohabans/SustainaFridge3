@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">SustainaFridge3</string>
     <string name="submit_button">submit</string>
+    <string name="top_text">enter your perishable food item:</string>
+    <string name="hint">food item</string>
 </resources>
