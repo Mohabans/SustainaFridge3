@@ -24,8 +24,10 @@ class Fridge (invList: MutableList<Item>){
 
     }
 
-    private fun remove(){
-
+    fun remove(index: Int){
+        val sortedItemsList : List<Item> = this.inventoryList.sortedBy{it.daysRemaining}
+        val toRemove = sortedItemsList.elementAt(index)
+        this.inventoryList.remove(toRemove)
     }
 
 }

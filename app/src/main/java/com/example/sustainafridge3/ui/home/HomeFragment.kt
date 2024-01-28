@@ -71,9 +71,28 @@ class HomeFragment : Fragment() {
         val mButton2: Button = view.findViewById(R.id.button2)
         val mEditText: EditText = view.findViewById(R.id.editText1)
         val mTextView: TextView = view.findViewById(R.id.textView)
-
-
+        val mButton3: Button = view.findViewById(R.id.button3)
         val mListView: ListView = view.findViewById(R.id.listView)
+
+        var mSelectedPosition: Int = -1
+
+        mListView.setOnItemClickListener { parent, view, position, id ->
+
+            mSelectedPosition = position
+
+        }
+
+        mButton3.setOnClickListener{
+            if(mSelectedPosition != -1){
+                testFridge.remove(mSelectedPosition)
+                showList(testFridge.nameList())
+                mSelectedPosition = -1
+            }
+
+        }
+
+
+
 
         mButton2.setOnClickListener {
 

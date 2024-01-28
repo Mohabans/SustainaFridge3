@@ -64,19 +64,26 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:layout_marginTop="100dp"
         android:isScrollContainer="true">
 
     </ListView>
 
     <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listView"
+        android:text="I finished this food item" />
+
+    <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:layout_below="@+id/listView"
+        android:layout_below="@+id/button3"
         android:text="Add With Camera" />
 
 
