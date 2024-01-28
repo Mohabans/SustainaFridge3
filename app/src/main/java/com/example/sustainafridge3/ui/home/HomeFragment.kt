@@ -68,11 +68,33 @@ class HomeFragment : Fragment() {
 
 
         val mButton: Button = view.findViewById(R.id.button)
+        val mButton2: Button = view.findViewById(R.id.button2)
         val mEditText: EditText = view.findViewById(R.id.editText1)
         val mTextView: TextView = view.findViewById(R.id.textView)
 
 
         val mListView: ListView = view.findViewById(R.id.listView)
+
+        mButton2.setOnClickListener {
+
+            val newFragment = camera_fragment()
+
+            // Get the FragmentManager
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            // Start a fragment transaction
+            val transaction = fragmentManager.beginTransaction()
+
+            // Replace the current fragment with the new one
+            transaction.replace(R.id.flFragment, newFragment)
+
+            // Add the transaction to the back stack (optional)
+            transaction.addToBackStack(null)
+
+            // Commit the transaction
+            transaction.commit()
+
+        }
 
         mButton.setOnClickListener {
 
