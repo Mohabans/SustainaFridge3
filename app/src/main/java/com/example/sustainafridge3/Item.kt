@@ -1,5 +1,7 @@
 package com.example.sustainafridge3
 
+import java.util.Date
+
 enum class Remaining {
     FULL,
     SEVENTYFIVE,
@@ -13,7 +15,9 @@ class Item(var name: String) {
     var portion: Remaining = Remaining.FULL
         private set
 
-    //var expirationDate :
+    var expireDate: Int = 0
+
+    var daysRemaining: Int = 0
 
     var owner: String = ""
         private set

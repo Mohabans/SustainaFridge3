@@ -1,6 +1,6 @@
 package com.example.sustainafridge3
 
-class Expire {
+class Expire() {
     // maps common foods to the number of days after purchasing that they will expire
     val ExpireList = mapOf<String, Int>("milk" to 7, "eggs" to 21, "deli meat" to 5, "ground meat" to 2, "steak" to 4,
         "blackberries" to 4, "grapes" to 7, "pineapple" to 5, "strawberries" to 3, "watermelon" to 4, "buttermilk" to 14,
@@ -21,7 +21,14 @@ class Expire {
     //getter for value from map from key(food type)
     // returns int of # of days until it expires
     // also i fr don't know why i needed that '?' by the return type
-    fun DaysToExpire(food: String): Int? {
-        return ExpireList[food]
+    fun DaysToExpire(food: String): Int {
+        val daysLeft = ExpireList[food]
+
+
+        if(daysLeft != null){
+            return daysLeft
+        } else {
+            return -1
+        }
     }
 }
