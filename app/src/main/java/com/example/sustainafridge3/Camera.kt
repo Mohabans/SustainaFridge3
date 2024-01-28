@@ -1,12 +1,18 @@
 package com.example.sustainafridge3
 
-import android.net.Uri
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
-import androidx.core.content.ContextCompat
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
 import androidx.camera.view.PreviewView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.LifecycleOwner
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,59 +26,71 @@ class Camera(private val lifecycleOwner: LifecycleOwner, private val previewView
     }
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(previewView.context)
-
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(previewView.createSurfaceProvider())
-                }
-
-            imageCapture = ImageCapture.Builder()
-                .build()
-
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            try {
-                cameraProvider.unbindAll()
-
-                cameraProvider.bindToLifecycle(
-                    lifecycleOwner, cameraSelector, preview, imageCapture
-                )
-
-            } catch(exc: Exception) {
-                Log.e("Camera", "Use case binding failed", exc)
-            }
-
-        }, ContextCompat.getMainExecutor(previewView.context))
+        // ... (unchanged)
     }
 
     fun takePhoto() {
         val imageCapture = imageCapture ?: return
 
-        val photoFile = File(
-            outputDirectory,
-            SimpleDateFormat(FILENAME_FORMAT, Locale.US
-            ).format(System.currentTimeMillis()) + ".jpg")
-
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
         imageCapture.takePicture(
-            outputOptions, 
-            ContextCompat.getMainExecutor(previewView.context), 
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e("Camera", "Photo capture failed: ${exc.message}", exc)
+            ContextCompat.getMainExecutor(previewView.context),
+            object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureSuccess(image: ImageProxy) {
+                    val bitmap = image.toBitmap()
+
+                    if (bitmap != null) {
+                        processImage(bitmap)
+                    }
+
+                    image.close()
                 }
 
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = Uri.fromFile(photoFile)
-                    Log.d("Camera", "Photo capture succeeded: $savedUri")
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e("Camera", "Photo capture failed: ${exception.message}", exception)
                 }
             })
+    }
+
+    private fun processImage(bitmap: Bitmap) {
+        // Use ML Kit's text recognition API on the bitmap
+        // Example: TextRecognition.processImage(bitmap)
+        // Handle the recognized text as needed
+        // ...
+
+        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+
+        val image = InputImage.fromBitmap(bitmap,0)
+
+        val result = recognizer.process(image)
+            .addOnSuccessListener { visionText ->
+                // Task completed successfully
+                // ...
+
+                val resultText = visionText.text
+                for (block in visionText.textBlocks) {
+                    val blockText = block.text
+                    val blockCornerPoints = block.cornerPoints
+                    val blockFrame = block.boundingBox
+                    for (line in block.lines) {
+                        val lineText = line.text
+                        val lineCornerPoints = line.cornerPoints
+                        val lineFrame = line.boundingBox
+                        for (element in line.elements) {
+                            val elementText = element.text
+                            val elementCornerPoints = element.cornerPoints
+                            val elementFrame = element.boundingBox
+                        }
+                    }
+                }
+
+            }
+            .addOnFailureListener { e ->
+                // Task failed with an exception
+                // ...
+            }
+
+
+
     }
 
     companion object {
