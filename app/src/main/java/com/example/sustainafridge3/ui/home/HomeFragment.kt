@@ -113,7 +113,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        return inflater.inflate(R.layout.fragment_camera_fragment, container, false)
+        return view
     }
 
 
