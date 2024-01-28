@@ -1,10 +1,16 @@
 package com.example.sustainafridge3
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.content.ContextCompat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +41,36 @@ class camera_fragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val viewFinder: PreviewView = view.findViewById(R.id.camera_view)
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(view.context)
+
+        cameraProviderFuture.addListener({
+            // Get the CameraProvider
+            val cameraProvider = cameraProviderFuture.get()
+
+            // Set up your use cases, e.g., Preview, ImageCapture, etc.
+            val preview = Preview.Builder().build()
+
+            // Connect the preview to the camera
+            preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+
+            // Create a camera selector (e.g., front or back camera)
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            // Bind the use cases to the lifecycle
+            try {
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview)
+            } catch (exception: Exception) {
+                //Log.e(TAG, "Use case binding failed", exception)
+            }
+        }, ContextCompat.getMainExecutor(requireContext()))
+
     }
 
     companion object {
