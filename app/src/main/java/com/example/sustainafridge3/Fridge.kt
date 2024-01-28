@@ -4,8 +4,8 @@ class Fridge (invList: MutableList<Item>){
 
     private var inventoryList : MutableList<Item> = invList
 
-    private fun addItem(item: Item) {
-        //  inventoryList.add(item)
+    fun addItem(item: Item) {
+          inventoryList.add(item)
     }
 
     private fun addItemCam(){
