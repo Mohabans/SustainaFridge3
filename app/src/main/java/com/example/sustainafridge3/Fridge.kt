@@ -1,0 +1,19 @@
+package com.example.sustainafridge3
+
+class Fridge (invList: MutableList<Item>){
+
+    private var inventoryList : MutableList<Item> = invList
+
+    private fun addItem(item: Item) {
+        //  inventoryList.add(item)
+    }
+
+    private fun addItemCam(){
+
+    }
+
+    private fun remove(){
+
+    }
+
+}
