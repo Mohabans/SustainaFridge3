@@ -2,6 +2,9 @@ package com.example.sustainafridge3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -28,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
 
             }
-
 
         }
 
