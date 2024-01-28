@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_marginStart="5dp"
-    android:layout_marginTop="40dp"
+    android:layout_marginTop="20dp"
     android:layout_marginEnd="0dp"
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
@@ -21,10 +21,23 @@
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:gravity="top"
+        android:text="SustainaFridge"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/top_text"
         android:textSize="18sp" />
 
@@ -57,6 +70,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="false"
         android:layout_marginEnd="15dp"
+        android:layout_marginTop="50dp"
         android:text="@string/submit_button"
         app:layout_constraintStart_toEndOf="@+id/editText1"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -64,8 +78,8 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="150dp"
         android:isScrollContainer="true">
 
     </ListView>
@@ -81,10 +95,10 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:layout_below="@+id/button3"
         android:text="Add With Camera" />
 
 
-    </RelativeLayout>
+</RelativeLayout>
