@@ -17,13 +17,18 @@ class MainActivity : AppCompatActivity() {
         val items = mutableListOf(Item("Apple"), Item("Milk"), Item("Eggs"))
         var testFridge = Fridge(items)
 
+        val fridgeMap: Expire
+
         val mButton: Button = findViewById(R.id.button)
         val mEditText: EditText = findViewById(R.id.editText1)
         val mTextView: TextView = findViewById(R.id.textView)
 
         mButton.setOnClickListener {
 
-            val userInput: String = mEditText.toString()
+            val userInput: String = mEditText.text.toString()
+
+
+
             mTextView.setText(userInput)
 
         }

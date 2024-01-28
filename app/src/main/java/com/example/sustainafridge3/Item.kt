@@ -7,9 +7,13 @@ enum class Remaining {
     TWENTYFIVE,
     EMPTY
 }
+
+
 class Item(var name: String) {
     var portion: Remaining = Remaining.FULL
         private set
+
+    //var expirationDate :
 
     var owner: String = ""
         private set
