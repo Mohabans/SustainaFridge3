@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/activityMain">
+    app:startDestination="@id/fragment_fridge">
 
     <fragment
-        android:id="@+id/activityMain"
-        android:name="com.example.sustainafridge3."
+        android:id="@+id/fragment_fridge"
+        android:name="com.example.sustainafridge3.ui.home.HomeFragment"
         android:label="Fridge"
-        tools:layout="@layout/activity_main">
+        tools:layout="@layout/fragment_fridge">
         <action
             android:id="@+id/action_fridge_to_cam"
             app:destination="@id/secondFragment" />

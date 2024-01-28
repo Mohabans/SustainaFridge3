@@ -3,4 +3,6 @@
     <string name="submit_button">Submit</string>
     <string name="top_text">Enter your perishable food item:</string>
     <string name="hint">Food item</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
