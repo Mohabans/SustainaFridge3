@@ -57,7 +57,7 @@ class camera_fragment : Fragment() {
             val preview = Preview.Builder().build()
 
             // Connect the preview to the camera
-            preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+            preview.setSurfaceProvider(viewFinder.surfaceProvider)
 
             // Create a camera selector (e.g., front or back camera)
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
