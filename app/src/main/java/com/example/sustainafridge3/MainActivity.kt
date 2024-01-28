@@ -48,10 +48,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var item1 = Item("Milk")
-        var item2 = Item("Grapes")
-        var item3 = Item("Yogurt")
-        val items = mutableListOf(Item("Apple"), Item("Milk"), Item("Eggs"))
+        val items = mutableListOf<Item>()
         var testFridge = Fridge(items)
 
         showList(testFridge.nameList())
@@ -71,6 +68,9 @@ class MainActivity : AppCompatActivity() {
 
 
             val userInput: String = mEditText.text.toString()
+
+            mEditText.setText("")
+
             val newItem = Item(userInput)
 
             if (fridgeMap.InList(userInput)) {
