@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/navigation/nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/activityMain">
+
+    <fragment
+        android:id="@+id/activityMain"
+        android:name="com.example.sustainafridge3."
+        android:label="Fridge"
+        tools:layout="@layout/activity_main">
+        <action
+            android:id="@+id/action_fridge_to_cam"
+            app:destination="@id/secondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.example.yourapp.SecondFragment"
+        android:label="Second Fragment"
+        tools:layout="@layout/fragment_second" />
+
+    <!-- Add more fragments and actions as needed -->
+
+</navigation>

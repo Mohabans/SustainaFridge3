@@ -79,4 +79,11 @@
         android:layout_below="@+id/listView"
         android:text="Add With Camera" />
 
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/listView"
+        android:layout_marginTop="10dp"/>
+
 </RelativeLayout>
