@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         mButton.setOnClickListener {
 
-            val userInput: String = mEditText.toString()
+            val userInput: String = mEditText.text.toString()
             mTextView.setText(userInput)
 
         }
